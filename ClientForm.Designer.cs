@@ -82,6 +82,7 @@ namespace Lab1
             this.addClientButton.Size = new System.Drawing.Size(100, 23);
             this.addClientButton.TabIndex = 4;
             this.addClientButton.Text = "Добавить";
+            this.addClientButton.Click += new System.EventHandler(this.AddClientButton_Click);
             // 
             // removeClientButton
             // 
@@ -90,6 +91,7 @@ namespace Lab1
             this.removeClientButton.Size = new System.Drawing.Size(100, 23);
             this.removeClientButton.TabIndex = 5;
             this.removeClientButton.Text = "Удалить";
+            this.removeClientButton.Click += new System.EventHandler(this.RemoveClientButton_Click);
             // 
             // searchTextBox
             // 
@@ -106,6 +108,7 @@ namespace Lab1
             this.searchButton.Size = new System.Drawing.Size(80, 23);
             this.searchButton.TabIndex = 7;
             this.searchButton.Text = "Искать";
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // clientsListBox
             // 
