@@ -49,6 +49,7 @@ namespace Lab1
             this.nameTextBox.Size = new System.Drawing.Size(150, 20);
             this.nameTextBox.TabIndex = 0;
             this.nameTextBox.Text = "Имя";
+            this.nameTextBox.Click += new System.EventHandler(this.nameTextBox_Click);
             // 
             // emailTextBox
             // 
@@ -57,6 +58,7 @@ namespace Lab1
             this.emailTextBox.Size = new System.Drawing.Size(150, 20);
             this.emailTextBox.TabIndex = 1;
             this.emailTextBox.Text = "Email";
+            this.emailTextBox.Click += new System.EventHandler(this.emailTextBox_Click);
             // 
             // phoneTextBox
             // 
@@ -65,6 +67,7 @@ namespace Lab1
             this.phoneTextBox.Size = new System.Drawing.Size(100, 20);
             this.phoneTextBox.TabIndex = 2;
             this.phoneTextBox.Text = "Телефон";
+            this.phoneTextBox.Click += new System.EventHandler(this.phoneTextBox_Click);
             // 
             // addressTextBox
             // 
@@ -74,6 +77,7 @@ namespace Lab1
             this.addressTextBox.Size = new System.Drawing.Size(450, 20);
             this.addressTextBox.TabIndex = 3;
             this.addressTextBox.Text = "Адрес";
+            this.addressTextBox.Click += new System.EventHandler(this.addressTextBox_Click);
             // 
             // addClientButton
             // 
@@ -100,6 +104,7 @@ namespace Lab1
             this.searchTextBox.Size = new System.Drawing.Size(200, 20);
             this.searchTextBox.TabIndex = 6;
             this.searchTextBox.Text = "Поиск";
+            this.searchTextBox.Click += new System.EventHandler(this.searchTextBox_Click);
             // 
             // searchButton
             // 

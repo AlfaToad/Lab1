@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    internal class ClientManager
+    public class ClientManager
     {
         public List<Client> Clients { get; private set; }
         public ClientManager()

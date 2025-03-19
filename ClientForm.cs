@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -31,16 +25,42 @@ namespace Lab1
             clientsListBox.Items.Clear();
             foreach (var client in clientManager.Clients)
             {
-                clientsListBox.Items.Add($"{client.Name} - {client.Email} ({client.Phone})");
+                clientsListBox.Items.Add($"{client.Name} - {client.Email} ({client.Phone}) {client.Address}");
             }
         }
 
         private void AddClientButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(nameTextBox.Text) || string.IsNullOrEmpty(emailTextBox.Text)
-            || string.IsNullOrEmpty(phoneTextBox.Text) || string.IsNullOrEmpty(addressTextBox.Text))
+            || string.IsNullOrEmpty(phoneTextBox.Text) || string.IsNullOrEmpty(addressTextBox.Text) || nameTextBox.Text == "Имя" || emailTextBox.Text == "Email"
+            || phoneTextBox.Text == "Телефон" || addressTextBox.Text == "Адрес")
             {
                 MessageBox.Show("Заполните все поля!");
+                return;
+            }
+            if (nameTextBox.Text.LastIndexOfAny(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '@', '#', '№', '$', ';', '%', '^', ':', '&', '?', '*', '(', ')', '+', '=', '_', '/', '\\', '|', '>', '<', '.', ',', '\'', '"']) != -1)
+            {
+                MessageBox.Show("Имя не должно содержать цифр!");
+                return;
+            }
+            if (!Regex.IsMatch(phoneTextBox.Text, @"^\+?\d{11}"))
+            {
+                MessageBox.Show("Введен несуществующий номер телефона!");
+                return;
+            }
+            if (!Regex.IsMatch(phoneTextBox.Text, @"^\+?\d{11}"))
+            {
+                MessageBox.Show("Введен несуществующий номер телефона!");
+                return;
+            }
+            if (!Regex.IsMatch(emailTextBox.Text, @"(@)(.+)$"))
+            {
+                MessageBox.Show("Введена несуществующая почта!");
+                return;
+            }
+            if (addressTextBox.Text.IndexOfAny(['!', '@', '#', '$', '%', '^', '&', '?', '+', '=', '_', '/', '\\', '|', '>', '<']) != -1)
+            {
+                MessageBox.Show("Введен неправильный адрес!");
                 return;
             }
             Client newClient = new Client(nameTextBox.Text, emailTextBox.Text,
@@ -73,7 +93,7 @@ namespace Lab1
                 string name = parts[0].Trim();
                 string email = parts[1].Trim();
                 /*               email = email.Remove(email.IndexOf(" "));*/
-                var clientToRemove = clientManager.Clients.Find(c => c.Name == name && c.Email + " (" + c.Phone + ")"
+                var clientToRemove = clientManager.Clients.Find(c => c.Name == name && c.Email + " (" + c.Phone + ") " + c.Address
                 == email);
                 if (clientToRemove != null)
                 {
@@ -91,6 +111,7 @@ namespace Lab1
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            if (searchTextBox.Text == "Поиск") { searchTextBox.Text = ""; }
             if (string.IsNullOrEmpty(searchTextBox.Text))
             {
                 UpdateClientsList();
@@ -100,8 +121,33 @@ namespace Lab1
             clientsListBox.Items.Clear();
             foreach (var client in searchResults)
             {
-                clientsListBox.Items.Add($"{client.Name} - {client.Email} ({client.Phone})");
+                clientsListBox.Items.Add($"{client.Name} - {client.Email} ({client.Phone}) {client.Address}");
             }
+        }
+
+        private void nameTextBox_Click(object sender, EventArgs e)
+        {
+            if (nameTextBox.Text == "Имя") { nameTextBox.Text = ""; }
+        }
+
+        private void emailTextBox_Click(object sender, EventArgs e)
+        {
+            if (emailTextBox.Text == "Email") { emailTextBox.Text = ""; }
+        }
+
+        private void phoneTextBox_Click(object sender, EventArgs e)
+        {
+            if (phoneTextBox.Text == "Телефон") { phoneTextBox.Text = ""; }
+        }
+
+        private void addressTextBox_Click(object sender, EventArgs e)
+        {
+            if (addressTextBox.Text == "Адрес") { addressTextBox.Text = ""; }
+        }
+
+        private void searchTextBox_Click(object sender, EventArgs e)
+        {
+            if (searchTextBox.Text == "Поиск") { searchTextBox.Text = ""; }
         }
     }
 }
